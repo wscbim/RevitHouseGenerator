@@ -1,0 +1,42 @@
+name: Build & Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup MSBuild
+        uses: microsoft/setup-msbuild@v2
+
+      - name: Setup NuGet
+        uses: nuget/setup-nuget@v2
+
+      - name: Restore packages
+        run: dotnet restore RevitHouseGenerator.csproj
+
+      - name: Build Release
+        run: dotnet build RevitHouseGenerator.csproj -c Release --no-restore
+
+      - name: Create release package
+        run: |
+          mkdir release
+          copy bin\Release\net48\RevitHouseGenerator.dll release\
+          copy install.ps1 release\
+          copy uninstall.ps1 release\
+          copy RevitHouseGenerator.addin release\
+          copy LICENSE release\
+
+      - name: Zip release
+        run: Compress-Archive -Path release\* -DestinationPath RevitHouseGenerator-${{ github.ref_name }}.zip
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: RevitHouseGenerator-${{ github.ref_name }}.zip
+          generate_release_notes: true
