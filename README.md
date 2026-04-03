@@ -38,7 +38,7 @@ A plugin for **Autodesk Revit 2025** that procedurally generates modular house s
 ## Usage
 
 1. Open any Revit project
-2. Go to the **DevWC** tab in the ribbon
+2. Go to the **DevWSC** tab in the ribbon
 3. Click **Solid** in the Generator panel
 4. Enter the number of modules (X and Y) in the dialog
 5. Click OK to generate the house structure
