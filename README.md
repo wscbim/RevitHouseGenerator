@@ -69,4 +69,5 @@ Output: `bin/Release/net48/RevitHouseGenerator.dll`
 
 **Wojciech Cieplucha**  
 Chair of Architectural Design, Cracow University of Technology  
-wojciech.cieplucha@pk.edu.pl
+wojciech.cieplucha@pk.edu.pl  
+https://kpa.arch.pk.edu.pl
